@@ -19,14 +19,17 @@ cd sakila_sync
 ```
 
 ### 2. Install dependencies
+```bash
 # Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install requirements
 pip install sqlalchemy mysql-connector-python
+```
 
 ### 3. Database Configuration
+```bash
 # db.py
 
 # Update the connection string with your MySQL credentials
@@ -36,7 +39,7 @@ Note: Please update the MYSQL_URL in db.py with your local MySQL credentials bef
 
 # SQLite path (default creates analytics.db in the current directory)
 SQLITE_URL = "sqlite:///analytics.db"
-
+```
 
 ## Usage (CLI Commands)
 The tool is executed via main.py. The following commands are available:
@@ -75,6 +78,7 @@ python main.py validate
 
 
 ## Analytics Schema
+```
 erDiagram
     FACT_RENTAL ||--|| DIM_DATE : "Rented Date"
     FACT_RENTAL ||--|| DIM_FILM : "Film Key"
@@ -108,12 +112,14 @@ erDiagram
         int store_key
         int date_key_paid
     }
-
+```
 
 ## Project Structure
+```
 sakila_sync/
 ├── main.py           # CLI Entry point
 ├── etl.py            # Core ETL logic (Full/Incremental sync functions)
 ├── models.py         # SQLAlchemy models (MySQL Reflection & SQLite Definition)
 ├── db.py             # Database connection settings (Engine/Session)
 └── README.md         # Documentation
+```

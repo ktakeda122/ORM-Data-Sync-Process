@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # MySQL (Source)
-MYSQL_URL = "mysql+mysqlconnector://root:supersecret1@localhost/sakila"
+MYSQL_URL = "mysql+mysqlconnector://root:password@localhost/sakila"
 # SQLite (Target)
 SQLITE_URL = "sqlite:///analytics.db"
 
