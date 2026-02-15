@@ -35,11 +35,11 @@ pip install sqlalchemy mysql-connector-python
 # Update the connection string with your MySQL credentials
 # Format: mysql+mysqlconnector://<user>:<password>@<host>/sakila
 MYSQL_URL = "mysql+mysqlconnector://root:password@localhost/sakila"
-Note: Please update the MYSQL_URL in db.py with your local MySQL credentials before running.
 
 # SQLite path (default creates analytics.db in the current directory)
 SQLITE_URL = "sqlite:///analytics.db"
 ```
+Note: Please update the MYSQL_URL in db.py with your local MySQL credentials before running.
 
 ## Usage (CLI Commands)
 The tool is executed via main.py. The following commands are available:
@@ -78,7 +78,7 @@ python main.py validate
 
 
 ## Analytics Schema
-```
+```mermaid
 erDiagram
     FACT_RENTAL ||--|| DIM_DATE : "Rented Date"
     FACT_RENTAL ||--|| DIM_FILM : "Film Key"
@@ -96,21 +96,61 @@ erDiagram
     BRIDGE_FILM_CATEGORY }|--|| DIM_CATEGORY : has
 
     FACT_RENTAL {
+        int fact_rental_key PK
         int rental_id
-        int film_key
-        int customer_key
-        int store_key
-        int date_key_rented
-        int date_key_returned
+        int film_key FK
+        int customer_key FK
+        int store_key FK
+        int date_key_rented FK
+        int date_key_returned FK
         int rental_duration_days
+        float amount
     }
     
     FACT_PAYMENT {
+        int fact_payment_key PK
         int payment_id
         float amount
-        int customer_key
-        int store_key
-        int date_key_paid
+        int customer_key FK
+        int store_key FK
+        int date_key_paid FK
+    }
+
+    DIM_FILM {
+        int film_key PK
+        int film_id
+        string title
+        string rating
+        int release_year
+        int length
+    }
+
+    DIM_CUSTOMER {
+        int customer_key PK
+        int customer_id
+        string first_name
+        string last_name
+        string email
+        string city
+        string country
+        boolean active
+    }
+
+    DIM_STORE {
+        int store_key PK
+        int store_id
+        string city
+        string country
+    }
+
+    DIM_DATE {
+        int date_key PK
+        date date
+        int year
+        int quarter
+        int month
+        int day_of_week
+        boolean is_weekend
     }
 ```
 
