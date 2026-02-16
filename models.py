@@ -106,13 +106,13 @@ class FactRental(TargetBase):
     rental_id = Column(Integer, unique=True)
     
     # Generate keys based on timestamps
-    date_key_rented = Column(Integer)  # FK to DimDate
+    date_key_rented = Column(Integer, ForeignKey('dim_date.date_key'), index=True)  # FK to DimDate
     date_key_returned = Column(Integer, nullable=True)
     
     # Surrogate Keys (FKs to other dimensions)
-    film_key = Column(Integer) 
-    store_key = Column(Integer)
-    customer_key = Column(Integer)
+    film_key = Column(Integer, ForeignKey('dim_film.film_key'), index=True)
+    store_key = Column(Integer, ForeignKey('dim_store.store_key'), index=True)
+    customer_key = Column(Integer, ForeignKey('dim_customer.customer_key'), index=True)
     
     staff_id = Column(Integer)
     rental_duration_days = Column(Integer) # Derived metric
@@ -124,10 +124,10 @@ class FactPayment(TargetBase):
     payment_id = Column(Integer, unique=True)
     
     # Dates
-    date_key_paid = Column(Integer) # FK to DimDate
-    
+    date_key_paid = Column(Integer, ForeignKey('dim_date.date_key'), index=True) # FK to DimDate
+   
     # Keys
-    customer_key = Column(Integer)
+    customer_key = Column(Integer, ForeignKey('dim_customer.customer_key'), index=True)
     store_key = Column(Integer)
     staff_id = Column(Integer)
     

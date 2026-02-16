@@ -352,7 +352,7 @@ def sync_bridge_tables(source, target):
 def sync_fact_rental(source, target):
     """
     Rental table differential synchronization
-    ※Fact tables require foreign key resolution
+    * Fact tables require foreign key resolution
     """
     table_name = 'fact_rental'
     
@@ -533,8 +533,7 @@ def incremental_load():
     print("Starting Incremental Load...")
 
     try:
-        # 1. Call the synchronization process for each table
-        # -----------------------------------------------------
+        # Call the synchronization process for each table
         sync_dim_film(source_session, target_session)
         sync_dim_customer(source_session, target_session)
         sync_dim_store(source_session, target_session)
